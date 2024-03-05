@@ -1,0 +1,133 @@
+================================================================================
+full
+================================================================================
+
+Screen 0: minimum 8 x 8, current 2560 x 1440, maximum 32767 x 32767
+DP-0 disconnected primary (normal left inverted right x axis y axis)
+DP-1 disconnected (normal left inverted right x axis y axis)
+DP-2 disconnected (normal left inverted right x axis y axis)
+DP-3 disconnected (normal left inverted right x axis y axis)
+HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
+   2560x1440     59.95*+
+   2048x1080     60.00
+   1920x1200     59.88
+   1680x1050     59.95
+   1600x1200     60.00
+   1280x800      59.81
+   1152x864      75.00
+   720x576       50.00
+   720x480       59.94
+DP-4 disconnected (normal left inverted right x axis y axis)
+DP-5 disconnected (normal left inverted right x axis y axis)
+
+--------------------------------------------------------------------------------
+
+(document
+  (screen (number)
+    (resolution (number) (number))
+    (resolution (number) (number))
+    (resolution (number) (number)))
+  (disconnected (display) (primary) (props))
+  (disconnected (display) (props))
+  (disconnected (display) (props))
+  (disconnected (display) (props))
+  (connected (display)
+    (geometry
+      (resolution (number) (number)) (number) (number))
+    (props)
+    (resolution_with_units
+      (number_with_units (number))
+      (number_with_units (number)))
+    (resolutions
+      (resolution_line
+        (resolution (number) (number)) (number) (mark) (mark))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))
+      (resolution_line (resolution (number) (number)) (number))))
+  (disconnected (display) (props))
+  (disconnected (display) (props)))
+
+================================================================================
+screen
+================================================================================
+Screen 0: minimum 8 x 8, current 2560 x 1440, maximum 32767 x 32767
+--------------------------------------------------------------------------------
+
+(document 
+  (screen (number)
+    (resolution (number) (number))
+    (resolution (number) (number))
+    (resolution (number) (number))))
+
+================================================================================
+disconnected
+================================================================================
+DP-5 disconnected (normal left inverted right x axis y axis)
+--------------------------------------------------------------------------------
+
+(document 
+  (disconnected (display) (props)))
+
+================================================================================
+connected-one-line
+================================================================================
+HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
+   2560x1440     59.95*+
+--------------------------------------------------------------------------------
+
+(document (connected (display)
+  (geometry
+    (resolution (number) (number)) (number) (number))
+  (props)
+  (resolution_with_units
+    (number_with_units (number))
+    (number_with_units (number)))
+  (resolutions 
+    (resolution_line (resolution (number) (number)) (number) (mark) (mark)))))
+
+================================================================================
+connected-multi-number [errors??]
+================================================================================
+HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
+  2560x1440     59.95*+
+  1920x1200     59.88   55.36
+--------------------------------------------------------------------------------
+
+(document (connected (display)
+  (geometry
+    (resolution
+      (number)
+      (number))
+    (number)
+    (number))
+  (props)
+  (resolution_with_units
+    (number_with_units (number))
+    (number_with_units (number)))
+  (resolutions 
+    (resolution_line (resolution (number) (number)) (number) (mark) (mark))
+    (resolution_line (resolution (number) (number)) (number) (number)))))
+
+
+================================================================================
+*resolution_line-working
+================================================================================
+  1920x1200     59.88
+--------------------------------------------------------------------------------
+
+(document (resolutions
+  (resolution_line (resolution (number) (number)) (number))))
+
+================================================================================
+*resolution_line-not-working
+================================================================================
+  1920x1200     59.88 66.56
+--------------------------------------------------------------------------------
+
+(document (resolutions
+  (resolution_line (resolution (number) (number)) (number) (number))))
