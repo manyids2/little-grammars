@@ -1,0 +1,5 @@
+[json, escape_sequence]
+ IMMEDIATE_TOKEN escape_sequence
+	 SEQ
+		 STRING \
+		 PATTERN (\"|\\|\/|b|f|n|r|t|u)

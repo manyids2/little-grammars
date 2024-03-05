@@ -1,0 +1,3 @@
+[json, document]
+ REPEAT document
+	 SYMBOL _value

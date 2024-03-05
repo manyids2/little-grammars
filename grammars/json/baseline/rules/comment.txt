@@ -1,0 +1,10 @@
+[json, comment]
+ TOKEN comment
+	 CHOICE
+		 SEQ
+			 STRING //
+			 PATTERN .*
+		 SEQ
+			 STRING /*
+			 PATTERN [^*]*\*+([^/*][^*]*\*+)*
+			 STRING /

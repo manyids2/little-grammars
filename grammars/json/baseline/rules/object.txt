@@ -1,0 +1,12 @@
+[json, object]
+ SEQ object
+	 STRING {
+	 CHOICE
+		 SEQ
+			 SYMBOL pair
+			 REPEAT
+				 SEQ
+					 STRING ,
+					 SYMBOL pair
+		 BLANK
+	 STRING }

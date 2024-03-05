@@ -1,0 +1,9 @@
+[json, pair]
+ SEQ pair
+	 FIELD key
+		 CHOICE
+			 SYMBOL string
+			 SYMBOL number
+	 STRING :
+	 FIELD value
+		 SYMBOL _value

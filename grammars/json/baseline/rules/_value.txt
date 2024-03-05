@@ -1,0 +1,9 @@
+[json, _value]
+ CHOICE _value
+	 SYMBOL object
+	 SYMBOL array
+	 SYMBOL number
+	 SYMBOL string
+	 SYMBOL true
+	 SYMBOL false
+	 SYMBOL null

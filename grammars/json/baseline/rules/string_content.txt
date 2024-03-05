@@ -1,0 +1,7 @@
+[json, string_content]
+ REPEAT1 string_content
+	 CHOICE
+		 IMMEDIATE_TOKEN
+			 PREC 1
+				 PATTERN [^\\"\n]+
+		 SYMBOL escape_sequence

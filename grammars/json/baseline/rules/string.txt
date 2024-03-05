@@ -1,0 +1,9 @@
+[json, string]
+ CHOICE string
+	 SEQ
+		 STRING "
+		 STRING "
+	 SEQ
+		 STRING "
+		 SYMBOL string_content
+		 STRING "

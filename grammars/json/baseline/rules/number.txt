@@ -1,0 +1,53 @@
+[json, number]
+ TOKEN number
+	 CHOICE
+		 SEQ
+			 SEQ
+				 CHOICE
+					 STRING -
+					 BLANK
+				 CHOICE
+					 STRING 0
+					 SEQ
+						 PATTERN [1-9]
+						 CHOICE
+							 PATTERN \d+
+							 BLANK
+			 STRING .
+			 CHOICE
+				 PATTERN \d+
+				 BLANK
+			 CHOICE
+				 SEQ
+					 CHOICE
+						 STRING e
+						 STRING E
+					 SEQ
+						 CHOICE
+							 STRING -
+							 BLANK
+						 PATTERN \d+
+				 BLANK
+		 SEQ
+			 SEQ
+				 CHOICE
+					 STRING -
+					 BLANK
+				 CHOICE
+					 STRING 0
+					 SEQ
+						 PATTERN [1-9]
+						 CHOICE
+							 PATTERN \d+
+							 BLANK
+			 CHOICE
+				 SEQ
+					 CHOICE
+						 STRING e
+						 STRING E
+					 SEQ
+						 CHOICE
+							 STRING -
+							 BLANK
+						 PATTERN \d+
+				 BLANK

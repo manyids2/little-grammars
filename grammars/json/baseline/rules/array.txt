@@ -1,0 +1,12 @@
+[json, array]
+ SEQ array
+	 STRING [
+	 CHOICE
+		 SEQ
+			 SYMBOL _value
+			 REPEAT
+				 SEQ
+					 STRING ,
+					 SYMBOL _value
+		 BLANK
+	 STRING ]

@@ -1,0 +1,156 @@
+[
+  {
+    "type": "fail",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fail_head",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "num_fails",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fail_title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "idx",
+          "named": true
+        },
+        {
+          "type": "name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "idx",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "num_fails",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "pass",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "fail",
+          "named": true
+        },
+        {
+          "type": "fail_head",
+          "named": true
+        },
+        {
+          "type": "fail_title",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\u001b[0m",
+    "named": false
+  },
+  {
+    "type": "\u001b[31m",
+    "named": false
+  },
+  {
+    "type": "\u001b[31m* ",
+    "named": false
+  },
+  {
+    "type": "\u001b[32m",
+    "named": false
+  },
+  {
+    "type": "\u001b[32m* ",
+    "named": false
+  },
+  {
+    "type": "\u001b[32mexpected\u001b[0m / \u001b[31mactual\u001b[0m",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "::",
+    "named": false
+  },
+  {
+    "type": "failure:",
+    "named": false
+  },
+  {
+    "type": "✓",
+    "named": false
+  },
+  {
+    "type": "✗",
+    "named": false
+  }
+]

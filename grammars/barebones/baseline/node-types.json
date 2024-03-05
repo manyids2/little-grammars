@@ -1,0 +1,69 @@
+[
+  {
+    "type": "corpus",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "fail",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metadata",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "pass",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "corpus",
+          "named": true
+        },
+        {
+          "type": "fail",
+          "named": true
+        },
+        {
+          "type": "metadata",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "corpus",
+    "named": false
+  },
+  {
+    "type": "✓",
+    "named": false
+  },
+  {
+    "type": "✗",
+    "named": false
+  }
+]

@@ -1,0 +1,207 @@
+{
+  "name": "baseline",
+  "rules": {
+    "source_file": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "pass"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "fail"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "fail_head"
+              },
+              {
+                "type": "STRING",
+                "value": "\u001b[32mexpected\u001b[0m / \u001b[31mactual\u001b[0m"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "fail_title"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_identifier": {
+      "type": "PATTERN",
+      "value": "[_@a-zA-Z0-9()\\[\\],.\\xC0-\\xD6\\xD8-\\xDE\\xDF-\\xF6\\xF8-\\xFF-]+"
+    },
+    "_number": {
+      "type": "PATTERN",
+      "value": "[_0-9]+"
+    },
+    "num_fails": {
+      "type": "SYMBOL",
+      "name": "_number"
+    },
+    "idx": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_number"
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        }
+      ]
+    },
+    "name": {
+      "type": "SYMBOL",
+      "name": "_identifier"
+    },
+    "pass": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "✓"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "\u001b[32m"
+                },
+                {
+                  "type": "STRING",
+                  "value": "\u001b[32m* "
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "name"
+            },
+            {
+              "type": "STRING",
+              "value": "\u001b[0m"
+            }
+          ]
+        }
+      ]
+    },
+    "fail": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "✗"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "\u001b[31m"
+                },
+                {
+                  "type": "STRING",
+                  "value": "\u001b[31m* "
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "name"
+            },
+            {
+              "type": "STRING",
+              "value": "\u001b[0m"
+            }
+          ]
+        }
+      ]
+    },
+    "fail_head": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "num_fails"
+        },
+        {
+          "type": "STRING",
+          "value": "failure:"
+        }
+      ]
+    },
+    "fail_title": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "idx"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "STRING",
+            "value": "*"
+          }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "name"
+            },
+            {
+              "type": "STRING",
+              "value": "::"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+

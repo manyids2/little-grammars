@@ -1,0 +1,74 @@
+==========================
+pass
+==========================
+
+✓ [32m* pass[0m
+
+---
+
+(source_file 
+  (pass (name)))
+
+==========================
+fail
+==========================
+
+✗ [31mfail[0m
+
+---
+
+(source_file 
+  (fail (name)))
+
+==========================
+seq(pass,fail)
+==========================
+
+✓ [32m* pass[0m
+✗ [31mfail[0m
+✓ [32m* seq(pass,fail)[0m
+
+---
+
+(source_file 
+  (pass (name))
+  (fail (name))
+  (pass (name)))
+
+==========================
+fail_head
+==========================
+
+1 failure:
+
+[32mexpected[0m / [31mactual[0m
+
+---
+
+(source_file (fail_head (num_fails)))
+
+==========================
+* fail_title
+==========================
+
+  1. * seq(pass,fail):
+
+---
+
+(source_file 
+  (fail_title (idx) (name)))
+
+==========================
+fail_body
+==========================
+
+  1. * fail_title:
+
+    (source_file
+        (name)))
+
+---
+
+(source_file 
+  (fail_title (idx) (name))
+  (fail_body (lines))
