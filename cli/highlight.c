@@ -1,115 +1,14 @@
----
-title: "Examples"
-draft: true
----
-
-## Common
-
-```c
-char *get_content(const char *fileName) {
-  FILE *fp;
-  long size = 0;
-  char *content;
-
-  // Read file to get size
-  fp = fopen(fileName, "rb");
-  if (fp == NULL) {
-    return "";
-  }
-  fseek(fp, 0L, SEEK_END);
-  size = ftell(fp) + 1;
-  fclose(fp);
-
-  // Read file for content
-  fp = fopen(fileName, "r");
-  content = (char *)memset(malloc(size), '\0', size);
-  fread(content, 1, size - 1, fp);
-  fclose(fp);
-
-  return content;
-}
-```
-
-## Parse
-
-```c
+// clang-format off
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <tree_sitter/api.h>
 
-int main(int argc, char *argv[]) {
-  if (argc != 2) {
-    printf("USAGE: parse FILE_PATH\n");
-    return EXIT_FAILURE;
-  }
-  const char *file_path = argv[1];
-  char *content = get_content(file_path);
+const char *reset_str = "\x1b[0m";
+const char *bold_str = "\x1b[1m";
+const char *italic_str = "\x1b[3m";
+const char *underline_str = "\x1b[4m";
 
-  // Keep language constant as `go` for now
-  TSLanguage *tree_sitter_go();
-  TSParser *parser = ts_parser_new();
-  ts_parser_set_language(parser, tree_sitter_go());
-
-  // Recursively print the tree
-  TSTree *tree = ts_parser_parse_string(parser, NULL, content, strlen(content));
-  TSNode root = ts_tree_root_node(tree);
-  print_tree(root, content, 0, NULL);
-  printf("\n");
-
-  return EXIT_SUCCESS;
-}
-```
-
-```c
-char *get_indent_str(int indent) {
-  char *str = malloc(sizeof(char) * (indent + 1));
-  for (int i = 0; i < indent; i++) {
-    str[i] = ' ';
-  }
-  str[indent] = '\0';
-  return str;
-}
-```
-
-```c
-void print_tree(TSNode n, char *content, int indent, const char *field) {
-  // Only print if named
-  if (ts_node_is_named(n)) {
-    TSPoint sp = ts_node_start_point(n);
-    TSPoint ep = ts_node_end_point(n);
-    char *indent_str = get_indent_str(indent);
-    if (!field) {
-      printf("%s (%s [%d, %d] - [%d, %d]", indent_str, ts_node_type(n), sp.row,
-             sp.column, ep.row, ep.column);
-    } else {
-      printf("%s %s : (%s [%d, %d] - [%d, %d]", indent_str, field,
-             ts_node_type(n), sp.row, sp.column, ep.row, ep.column);
-    }
-    free(indent_str);
-  }
-
-  // Iterate through all or we miss fields
-  int n_children = ts_node_child_count(n);
-  for (int i = 0; i < n_children; i++) {
-    TSNode child = ts_node_child(n, i);
-    if (ts_node_is_named(child)) {
-      printf("\n");
-    }
-    const char *field_name = ts_node_field_name_for_child(n, i);
-    print_tree(child, content, indent + 2, field_name);
-  }
-
-  // Print only if named
-  if (ts_node_is_named(n)) {
-    printf(")");
-  }
-}
-```
-
-## Query
-
-```c
 char *get_substring(char *line, int start, int end) {
   int len = end - start;
   char *s = malloc(sizeof(char) * (len + 1));
@@ -119,87 +18,29 @@ char *get_substring(char *line, int start, int end) {
   s[len] = '\0';
   return s;
 }
-```
 
-```c
-int main(int argc, char *argv[]) {
-  if (argc != 3) {
-    printf("USAGE: query QUERY_PATH FILE_PATH\n");
-    return EXIT_FAILURE;
+char *get_content(const char *fileName) {
+  FILE *fp;
+  char *content;
+  long size = 0;
+
+  /* Read File to get size */
+  fp = fopen(fileName, "rb");
+  if (fp == NULL) {
+    return "";
   }
+  fseek(fp, 0L, SEEK_END);
+  size = ftell(fp) + 1;
+  fclose(fp);
 
-  // Read query and file
-  char *query_path    = argv[1];
-  char *content_query = get_content(query_path);
+  /* Read File for content */
+  fp = fopen(fileName, "r");
+  content = (char *)memset(malloc(size), '\0', size);
+  fread(content, 1, size - 1, fp);
+  fclose(fp);
 
-  char *file_path     = argv[2];
-  char *content_file  = get_content(file_path) ;
-
-  // Keep language constant as `go` for now
-  TSLanguage   *tree_sitter_go();
-  TSParser     *parser = ts_parser_new();
-  ts_parser_set_language(parser, tree_sitter_go());
-
-  // Parse file
-  TSTree *tree = ts_parser_parse_string(parser, NULL, content_file, strlen(content_file));
-  TSNode root  = ts_tree_root_node(tree);
-
-  // Parse query
-  TSQuery      *q;
-  uint32_t     eo;
-  TSQueryError et;
-  q = ts_query_new(tree_sitter_go(), content_query, strlen(content_query), &eo, &et);
-  if (et != TSQueryErrorNone) {
-    printf("Error in `ts_query_new`: %lu\n", (uint64_t)et);
-    return EXIT_FAILURE;
-  }
-
-  // Total number of query patterns, unique capture names and strings
-  int n_patterns = ts_query_pattern_count(q);
-  int n_captures = ts_query_capture_count(q);
-  int n_strings  = ts_query_string_count (q);
-
-  // Execute query on code
-  TSQueryMatch  m;
-  TSQueryCursor *c = ts_query_cursor_new();
-  ts_query_cursor_exec(c, q, root);
-  while (ts_query_cursor_next_match(c, &m)) {
-    printf("  pattern: %d\n", m.pattern_index);
-    for (int ci = 0; ci < m.capture_count; ci++) {
-      TSQueryCapture cp    = m.captures[ci];
-      TSNode         n     = cp.node;
-      TSPoint        start = ts_node_start_point(n);
-      TSPoint        end   = ts_node_end_point(n);
-      TSTreeCursor   tt    = ts_tree_cursor_new(n);
-
-      uint32_t length;
-      // TODO: Not sure how to free, get discards qualifiers
-      const char *capture_name = ts_query_capture_name_for_id(q, cp.index, &length);
-      if (start.row == end.row) {
-        uint32_t sb = ts_node_start_byte(n);
-        uint32_t eb = ts_node_end_byte(n);
-        char *text = get_substring(content_file, sb, eb);
-        printf("    capture: %d - %s, start: (%d, %d), end: (%d, %d), text: " "`%s`\n",
-               cp.index, capture_name, start.row, start.column, end.row, end.column, text);
-        free(text);
-      } else {
-        printf("    capture: %s, start: (%d, %d), end: (%d, %d)\n",
-               capture_name, start.row, start.column, end.row, end.column);
-      }
-    }
-  }
-
-  return EXIT_SUCCESS;
+  return content;
 }
-```
-
-## Highlight
-
-```c
-const char *reset_str = "\x1b[0m";
-const char *bold_str = "\x1b[1m";
-const char *italic_str = "\x1b[3m";
-const char *underline_str = "\x1b[4m";
 
 // Create map to store captures
 // Use traversal order to keep track of node
@@ -244,12 +85,12 @@ int get_node_idx(TSNode n, Node *nodes, int n_nodes) {
 // Types and corresponding themes
 #define MAX_STYLES 128
 typedef struct {
-  char names      [MAX_STYLES][64];
-  int  background [MAX_STYLES];
-  int  foreground [MAX_STYLES];
-  int  bold       [MAX_STYLES];
-  int  italic     [MAX_STYLES];
-  int  underline  [MAX_STYLES];
+  char names[MAX_STYLES][64]; // Names of styles
+  int  background[MAX_STYLES];
+  int  foreground[MAX_STYLES];
+  int  bold[MAX_STYLES];
+  int  italic[MAX_STYLES];
+  int  underline[MAX_STYLES];
   int  count;
 } Theme;
 
@@ -481,4 +322,3 @@ int main(int argc, char *argv[]) {
 
   return EXIT_SUCCESS;
 }
-```

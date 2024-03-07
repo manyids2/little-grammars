@@ -1,6 +1,7 @@
 .nvim.lua
 .envrc
 .venv/
+.cache/
 output-*.txt
 output.txt
 __pycache__/
@@ -18,3 +19,8 @@ package.json
 
 tree-sitter-x
 tree-sitter-html
+
+cli/query
+cli/parse
+cli/highlight
+cli/compile_commands.json
