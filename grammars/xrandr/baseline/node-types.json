@@ -3,7 +3,7 @@
     "type": "connected",
     "named": true,
     "fields": {
-      "name": {
+      "display": {
         "multiple": false,
         "required": true,
         "types": [
@@ -51,7 +51,7 @@
     "type": "disconnected",
     "named": true,
     "fields": {
-      "name": {
+      "display": {
         "multiple": false,
         "required": true,
         "types": [
@@ -115,7 +115,19 @@
       "required": true,
       "types": [
         {
-          "type": "number",
+          "type": "xoff",
+          "named": true
+        },
+        {
+          "type": "xres",
+          "named": true
+        },
+        {
+          "type": "yoff",
+          "named": true
+        },
+        {
+          "type": "yres",
           "named": true
         }
       ]
@@ -123,11 +135,6 @@
   },
   {
     "type": "mark",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "number",
     "named": true,
     "fields": {}
   },
@@ -164,7 +171,11 @@
       "required": true,
       "types": [
         {
-          "type": "number",
+          "type": "xres",
+          "named": true
+        },
+        {
+          "type": "yres",
           "named": true
         }
       ]
@@ -240,7 +251,17 @@
     }
   },
   {
+    "type": "xoff",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "xres",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "yoff",
     "named": true,
     "fields": {}
   },
@@ -248,6 +269,10 @@
     "type": "yres",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "\n",
+    "named": false
   },
   {
     "type": "(",
@@ -318,6 +343,10 @@
     "named": false
   },
   {
+    "type": "number",
+    "named": true
+  },
+  {
     "type": "primary",
     "named": true
   },
@@ -330,7 +359,23 @@
     "named": false
   },
   {
+    "type": "xoff",
+    "named": false
+  },
+  {
+    "type": "xres",
+    "named": false
+  },
+  {
     "type": "y",
+    "named": false
+  },
+  {
+    "type": "yoff",
+    "named": false
+  },
+  {
+    "type": "yres",
     "named": false
   }
 ]

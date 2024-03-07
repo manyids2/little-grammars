@@ -26,79 +26,39 @@
       "value": "[\\d\\.]+"
     },
     "xres": {
-      "type": "PATTERN",
-      "value": "[\\d\\.]+"
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "number"
+      },
+      "named": false,
+      "value": "xres"
     },
     "yres": {
-      "type": "PATTERN",
-      "value": "[\\d\\.]+"
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "number"
+      },
+      "named": false,
+      "value": "yres"
     },
     "resolution": {
-      "type": "PREC_LEFT",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "xres"
-          },
-          {
-            "type": "STRING",
-            "value": "x"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "yres"
-          }
-        ]
-      }
-    },
-    "geometry": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "number"
+          "name": "xres"
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "x"
-          }
+          "type": "STRING",
+          "value": "x"
         },
         {
           "type": "SYMBOL",
-          "name": "number"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "+"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "number"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "+"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "number"
+          "name": "yres"
         }
       ]
-    },
-    "display": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z0-9-]+-[0-9]+"
     },
     "screen": {
       "type": "SEQ",
@@ -170,6 +130,10 @@
         }
       ]
     },
+    "display": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9-]+-[0-9]+"
+    },
     "props": {
       "type": "SEQ",
       "members": [
@@ -228,7 +192,7 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "display",
           "content": {
             "type": "SYMBOL",
             "name": "display"
@@ -255,23 +219,63 @@
         }
       ]
     },
-    "_number_with_units": {
+    "xoff": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "number"
+      },
+      "named": false,
+      "value": "xoff"
+    },
+    "yoff": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "number"
+      },
+      "named": false,
+      "value": "yoff"
+    },
+    "geometry": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "number"
+          "name": "xres"
         },
         {
-          "type": "FIELD",
-          "name": "units",
+          "type": "IMMEDIATE_TOKEN",
           "content": {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "[a-zA-Z]+"
-            }
+            "type": "STRING",
+            "value": "x"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "yres"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "+"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "xoff"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "+"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "yoff"
         }
       ]
     },
@@ -279,16 +283,48 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_number_with_units"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "xres"
+            },
+            {
+              "type": "FIELD",
+              "name": "units",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[a-zA-Z]+"
+                }
+              }
+            }
+          ]
         },
         {
           "type": "STRING",
           "value": "x"
         },
         {
-          "type": "SYMBOL",
-          "name": "_number_with_units"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "yres"
+            },
+            {
+              "type": "FIELD",
+              "name": "units",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[a-zA-Z]+"
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -333,6 +369,10 @@
               }
             ]
           }
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
         }
       ]
     },
@@ -348,7 +388,7 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "display",
           "content": {
             "type": "SYMBOL",
             "name": "display"
@@ -382,16 +422,8 @@
           "name": "resolution_with_units"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "resolutions"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "resolutions"
         }
       ]
     }
@@ -402,11 +434,7 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [
-    [
-      "_resolution_line"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],

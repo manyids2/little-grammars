@@ -20,29 +20,18 @@ DP-5 disconnected (normal left inverted right x axis y axis)
   (disconnected (display) (props)))
 
 ================================================================================
-connected-first-line
-================================================================================
-HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
---------------------------------------------------------------------------------
-
-(document
-  (connected (display)
-    (geometry (number) (number) (number) (number))
-    (props)
-    (resolution_with_units (number) (number))))
-
-================================================================================
 connected-one-line
 ================================================================================
 HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
    2560x1440     59.95*+
+
 --------------------------------------------------------------------------------
 
 (document
   (connected (display)
-    (geometry (number) (number) (number) (number))
+    (geometry (xres) (yres) (xoff) (yoff))
     (props)
-    (resolution_with_units (number) (number))
+    (resolution_with_units (xres) (yres))
   (resolutions
     (resolution (xres) (yres)) (number) (mark) (mark))))
 
@@ -52,13 +41,14 @@ connected-multi-line
 HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
   2560x1440     59.95*+
   1920x1200     59.88 
+
 --------------------------------------------------------------------------------
 
 (document
   (connected (display)
-    (geometry (number) (number) (number) (number))
+    (geometry (xres) (yres) (xoff) (yoff))
     (props)
-    (resolution_with_units (number) (number))
+    (resolution_with_units (xres) (yres))
   (resolutions
     (resolution (xres) (yres)) (number) (mark) (mark)
     (resolution (xres) (yres)) (number))))
@@ -69,13 +59,14 @@ connected-multi-number
 HDMI-0 connected 2560x1440+0+0 (normal left inverted right x axis y axis) 597mm x 336mm
   2560x1440     59.95*+
   1920x1200     59.88    62.56
+
 --------------------------------------------------------------------------------
 
 (document
   (connected (display)
-    (geometry (number) (number) (number) (number))
+    (geometry (xres) (yres) (xoff) (yoff))
     (props)
-    (resolution_with_units (number) (number))
+    (resolution_with_units (xres) (yres))
   (resolutions
     (resolution (xres) (yres)) (number) (mark) (mark)
     (resolution (xres) (yres)) (number) (number))))
@@ -120,9 +111,9 @@ DP-5 disconnected (normal left inverted right x axis y axis)
   (disconnected (display) (props))
   (disconnected (display) (props))
   (connected (display)
-    (geometry (number) (number) (number) (number))
+    (geometry (xres) (yres) (xoff) (yoff))
     (props) 
-    (resolution_with_units (number) (number))
+    (resolution_with_units (xres) (yres))
     (resolutions
       (resolution (xres) (yres)) (number) (mark) (mark)
       (resolution (xres) (yres)) (number)
