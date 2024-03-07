@@ -1,12 +1,18 @@
 module.exports = grammar({
   name: "xrandr",
+  conflicts: ($) => [[$._resolution_line]],
   rules: {
-    // document: ($) => repeat(choice($.screen, $.disconnected, $.connected)),
-    document: ($) => $.resolutions,
-    number: (_) => prec.left(-2, /[\d\.]+/),
-    delim: (_) => /\n/,
-    resolution: ($) => prec.left(-1, seq($.number, 'x', $.number)),
-    geometry: ($) => seq($.resolution, '+', $.number, '+', $.number),
+    document: ($) => repeat(choice($.screen, $.disconnected, $.connected)),
+    number: ($) => /[\d\.]+/,
+    xres: ($) => /[\d\.]+/,
+    yres: ($) => /[\d\.]+/,
+    resolution: ($) => prec.left(1, seq($.xres, 'x', $.yres)),
+    geometry: ($) => seq(
+      $.number, token.immediate('x'),
+      $.number, token.immediate('+'),
+      $.number, token.immediate('+'),
+      $.number
+    ),
     display: ($) => /[a-zA-Z0-9-]+-[0-9]+/,
     // Screen
     screen: ($) => seq(
@@ -16,23 +22,23 @@ module.exports = grammar({
       'maximum', field('maximum', $.resolution),
     ),
     // Disconnected
-    props: ($) => seq('(', repeat(choice('normal', 'left', 'right', 'x', 'y', 'axis', 'inverted')), ')'),
+    props: ($) => seq('(', repeat1(choice('normal', 'left', 'right', 'x', 'y', 'axis', 'inverted')), ')'),
     primary: ($) => 'primary',
     disconnected: ($) => seq(
       field('name', $.display), 'disconnected', repeat(field('primary', $.primary)),
       $.props,
     ),
     // Connected
+    _number_with_units: ($) => seq($.number, field("units", token.immediate(/[a-zA-Z]+/))),
+    resolution_with_units: ($) => seq($._number_with_units, 'x', $._number_with_units),
+    mark: ($) => choice(token.immediate('+'), token.immediate('*')),
+    _resolution_line: ($) => seq($.resolution, repeat1(choice($.number, $.mark))),
+    resolutions: ($) => repeat1($._resolution_line),
     connected: ($) => seq(
-      field('name', $.display), 'connected', repeat(field('primary', 'primary')), $.geometry,
+      field('name', $.display), 'connected', repeat(field('primary', $.primary)), $.geometry,
       $.props,
       $.resolution_with_units,
-      // $.resolutions, // BUG: Why is this throwing error only in the context of connected?
+      optional($.resolutions),
     ),
-    number_with_units: ($) => seq($.number, /[a-zA-Z]+/),
-    resolution_with_units: ($) => seq($.number_with_units, 'x', $.number_with_units),
-    mark: ($) => choice('+', '*'),
-    resolution_line: ($) => prec.left(1, seq($.resolution, repeat1(choice($.number, $.mark)))),
-    resolutions: ($) => repeat1($.resolution_line),
   },
 });

@@ -1,14 +1,106 @@
 [
   {
-    "type": "document",
+    "type": "connected",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "display",
+            "named": true
+          }
+        ]
+      },
+      "primary": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "primary",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "geometry",
+          "named": true
+        },
+        {
+          "type": "props",
+          "named": true
+        },
+        {
+          "type": "resolution_with_units",
+          "named": true
+        },
+        {
+          "type": "resolutions",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "disconnected",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "display",
+            "named": true
+          }
+        ]
+      },
+      "primary": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "primary",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "resolutions",
+          "type": "props",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "connected",
+          "named": true
+        },
+        {
+          "type": "disconnected",
+          "named": true
+        },
+        {
+          "type": "screen",
           "named": true
         }
       ]
@@ -25,10 +117,6 @@
         {
           "type": "number",
           "named": true
-        },
-        {
-          "type": "resolution",
-          "named": true
         }
       ]
     }
@@ -40,26 +128,6 @@
   },
   {
     "type": "number",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "number_with_units",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "primary",
     "named": true,
     "fields": {}
   },
@@ -77,6 +145,25 @@
       "required": true,
       "types": [
         {
+          "type": "xres",
+          "named": true
+        },
+        {
+          "type": "yres",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "resolution_with_units",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
           "type": "number",
           "named": true
         }
@@ -84,7 +171,7 @@
     }
   },
   {
-    "type": "resolution_line",
+    "type": "resolutions",
     "named": true,
     "fields": {},
     "children": {
@@ -107,34 +194,60 @@
     }
   },
   {
-    "type": "resolution_with_units",
+    "type": "screen",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "number_with_units",
-          "named": true
-        }
-      ]
+    "fields": {
+      "current": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "resolution",
+            "named": true
+          }
+        ]
+      },
+      "maximum": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "resolution",
+            "named": true
+          }
+        ]
+      },
+      "minimum": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "resolution",
+            "named": true
+          }
+        ]
+      },
+      "screen_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
-    "type": "resolutions",
+    "type": "xres",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "resolution_line",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
+  },
+  {
+    "type": "yres",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "(",
@@ -206,7 +319,7 @@
   },
   {
     "type": "primary",
-    "named": false
+    "named": true
   },
   {
     "type": "right",
