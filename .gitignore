@@ -4,6 +4,8 @@
 .cache/
 output-*.txt
 output.txt
+go.mod
+go.sum
 __pycache__/
 
 tree-sitter-x/

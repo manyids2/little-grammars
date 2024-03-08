@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
 
   char *file_path     = argv[2];
   char *content_file  = get_content(file_path) ;
+  printf("%s\n", file_path);
 
   // Keep language constant as `go` for now
   TSLanguage   *tree_sitter_go();

@@ -1,147 +1,36 @@
 ---
 title: "Little grammars"
-date: 2024-01-27T13:21:21+01:00
 draft: true
+date: 2024-01-01T08:00:00-06:00
 ---
 
-Defining simple grammars to practice thinking about language syntax.
+Case studies of simple grammars.
 
-- [ ] valid-json
-- [ ] taskwarrior
-- [ ] arandr
+## [barebones](./barebones/01-index)
 
-After adding:
+We start with the starter kit example, and see how to modify it to respect newlines.
 
-```javascript
-contact: ($) => seq("{", commaSep($.user_pair), commaSep($.phone_pair), "}"),
-user_pair: ($) =>
-  seq(
-    field("key", "user"),
-    ":",
-    field("value", $.string),
-  ),
-phone_pair: ($) =>
-  seq(
-    field("key", "phone"),
-    ":",
-    field("value", $.number),
-  ),
-```
+<hr/>
 
-And changing
+## [s-expressions](./s-expressions/02-index)
 
-```javascript
-  choice($.object,   $.contact,   $.array, $.number, $.string, $.true, $.false, $.null),
-```
+We explore the simplest language with just 4 rules.
 
-We get:
+<hr/>
 
-```
-Unresolved conflict for symbol sequence:
+## [valid-json](./valid-json/03-index)
 
-  '{'  '}'  •  '{'  …
+We use tree-sitter to validate a custom json config, with a list of users and
+phone numbers.
 
-Possible interpretations:
+<hr/>
 
-  1:  (contact  '{'  '}')  •  '{'  …
-  2:  (object  '{'  '}')  •  '{'  …
+## [xrandr](./xrandr/04-index)
 
-Possible resolutions:
+We use tree-sitter to parse the output of the CLI tool `xrandr`.
 
-  1:  Specify a higher precedence in `object` than i
-n the other rules.
-  2:  Specify a higher precedence in `contact` than
-in the other rules.
-  3:  Add a conflict for these rules: `object`, `con
-tact`
+<hr/>
 
-Generate failed:
+## Appendix: Running Experiments
 
-[Process exited 1]
-```
-
-Finally, resolved with:
-
-```javascript
-object: ($) => prec(-1, seq("{", commaSep($.pair), "}")),
-contact: ($) => prec(1, seq("{", $.user_pair, ",", $.phone_pair, "}")),
-pair: ($) =>
-  seq(
-    field("key", choice($.string, $.number)),
-    ":",
-    field("value", $._value),
-  ),
-user_pair: ($) =>
-  seq(
-    '"user"',
-    ":",
-    field("value", $.string),
-  ),
-phone_pair: ($) =>
-  seq(
-    '"phone"',
-    ":",
-    field("value", $.number),
-  ),
-```
-
-Now this works:
-
-```
-================================================================================
-*not-contacts
-================================================================================
-
-[{"users": "abc", "phone": 13247}]
-
---------------------------------------------------------------------------------
-
-(document (array (object
-    (pair
-      (string (string_content))
-      (string (string_content)))
-    (pair
-      (string (string_content))
-      (number))
-)))
-
-
-================================================================================
-*contacts
-================================================================================
-
-[{"user": "abc", "phone": 13247}]
-
---------------------------------------------------------------------------------
-
-(document (array (contact
-    (user_pair (string (string_content)))
-    (phone_pair (number))
-)))
-```
-
-If we delete the general object, we get:
-
-```javascript
-_value: ($) =>
-  choice($.contact, $.array, $.number, $.string, $.true, $.false, $.null), // No $.object
-```
-
-We have a parser that validates our data.
-
-```
-================================================================================
-*only-contacts
-================================================================================
-
-[{"user": "abc", "phone": 13247}, {"user": "abc", "phone": "518-CALL-ME"}]
-
---------------------------------------------------------------------------------
-
-(document (array (contact
-      (user_pair (string (string_content)))
-      (phone_pair (number)))
-    (ERROR
-      (user_pair (string (string_content)))
-      (number) (UNEXPECTED 'C'))))
-```
+<hr/>

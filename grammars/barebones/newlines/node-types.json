@@ -1,0 +1,43 @@
+[
+  {
+    "type": "document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "fail",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fail",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "pass",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "FAIL:\n",
+    "named": false
+  },
+  {
+    "type": "PASS:\n",
+    "named": false
+  }
+]

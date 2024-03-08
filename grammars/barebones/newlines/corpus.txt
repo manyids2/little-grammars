@@ -1,0 +1,34 @@
+==========================
+*pass
+==========================
+PASS:
+  😸 sdfsd sdfsdfsd 
+---
+
+(document 
+  (pass))
+
+==========================
+*basic
+==========================
+PASS:
+  😸 sdfsd sdfsdfsd 
+    ssdfsdf
+  😸 sdfsd sdfsdfsd 
+    ssdfsdf
+  😸 sdfsd sdfsdfsd 
+    ssdfsdf
+  😸 sdfsd sdfsdfsd 
+    ssdfsdf
+FAIL:
+  🐻 sdfsd sdfsdfsd 
+    fsdfsdf
+FAIL:
+  🐶 sdfsd sdfsdfsd 
+    fsdfsdf
+---
+
+(document 
+  (pass)
+  (fail)
+  (fail))

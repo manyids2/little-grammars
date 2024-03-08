@@ -1,78 +1,16 @@
 ==========================
 basic
 ==========================
+hello
+---
 
-  corpus :
+(source_file)
+
+==========================
+basic-with-newline
+==========================
+hello
 
 ---
 
-(source_file   
-  (corpus))
-
-==========================
-metadata
-==========================
-
-  expt : hi
-  run : hello
-  corpus :
-
----
-
-(source_file   
-  (metadata)
-  (metadata)
-  (corpus))
-
-==========================
-pass
-==========================
-
-  expt : hi
-  run : hello
-  corpus :
-    ✓ * hello
-
----
-
-(source_file   
-  (metadata)
-  (metadata)
-  (corpus)
-  (pass))
-
-==========================
-fail
-==========================
-
-  expt : hi
-  run : hello
-  corpus :
-    ✗ hi
-
----
-
-(source_file   
-  (metadata)
-  (metadata)
-  (corpus)
-  (fail))
-
-==========================
-general
-==========================
-
-  expt : hi
-  run : hello
-  corpus :
-    ✓ * hello
-    ✗ hi
-
----
-
-(source_file   
-  (metadata)
-  (metadata)
-  (corpus)
-  (pass)
-  (fail))
+(source_file)

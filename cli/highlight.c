@@ -250,7 +250,7 @@ int main(int argc, char *argv[]) {
   char *config_path    = argv[3];
   char *content_config = get_content(config_path);
 
-  // Parse config file with jaon with json
+  // Parse config file with json
   TSParser *config_parser = ts_parser_new();
   ts_parser_set_language(config_parser, tree_sitter_json());
   TSTree *config_tree = ts_parser_parse_string(config_parser, NULL, content_config, strlen(content_config));

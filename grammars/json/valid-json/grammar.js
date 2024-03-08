@@ -5,14 +5,15 @@ module.exports = grammar({
   rules: {
     document: ($) => repeat($._value),
     _value: ($) =>
-      choice($.object, $.array, $.number, $.string, $.true, $.false, $.null),
-    object: ($) => seq("{", commaSep($.pair), "}"),
-    pair: ($) =>
-      seq(
-        field("key", choice($.string, $.number)),
-        ":",
-        field("value", $._value),
-      ),
+      choice($.contact, $.object, $.array, $.number, $.string, $.true, $.false, $.null),
+    object: ($) => prec(-1, seq("{", commaSep($.pair), "}")),
+    pair: ($) => seq(field("key", choice($.string, $.number)), ":", field("value", $._value),),
+    contact: ($) => seq("{", $._user_pair, ",", $._phone_pair, "}"),
+    user: ($) => alias($.string_content, "phone"),
+    _user: ($) => choice(seq('"', '"'), seq('"', $.user, '"')),
+    phone: ($) => alias($.number, "phone"),
+    _user_pair: ($) => seq('"user"', ":", field("user", $._user)),
+    _phone_pair: ($) => seq('"phone"', ":", field("phone", $.phone)),
     array: ($) => seq("[", commaSep($._value), "]"),
     string: ($) => choice(seq('"', '"'), seq('"', $.string_content, '"')),
     string_content: ($) =>
