@@ -26,6 +26,10 @@ Further applications could include:
 - select: CSS-like queries over codebase, returning returning found text
 - **code generation**: This is our goal.
 
+Repo:
+
+- [little-grammars](https://github.com/manyids2/little-grammars)
+
 ## [Introduction](/projects/tree-sitter/01-introduction/01-index)
 
 We look at how grammars are defined in tree-sitter by exploring implementations
@@ -48,9 +52,9 @@ We propose new CLI tools: `select`, `format` and `layout`.
 
 We use simple grammars as case studies to explore creating parsers.
 
-- [barebones](./barebones/01-index)
-- [s-expressions](./s-expressions/02-index)
-- [valid-json](./valid-json/03-index)
-- [xrandr](./xrandr/04-index)
+- [barebones](./04-little-grammars/barebones/01-index)
+- [s-expressions](./04-little-grammars/s-expressions/02-index)
+- [valid-json](./04-little-grammars/valid-json/03-index)
+- [xrandr](./04-little-grammars/xrandr/04-index)
 
 <hr/>
